@@ -56,12 +56,12 @@
     <div class="base-where">
       <Row style="text-align: right;">
         <!-- <Col span="18">
-          <el-checkbox :indeterminate="isShowAll" v-model="checkAll" @change="changeShowAll">SELECT</el-checkbox>
-          <div style="margin: 7px 0;"></div>
-          <el-checkbox-group v-model="checkedShow" @change="changeShow">
-            <el-checkbox v-for="(col,index) in listCol" :label="col.key" :key="index">{{col.key}}</el-checkbox>
-          </el-checkbox-group>
-          </Col> -->
+              <el-checkbox :indeterminate="isShowAll" v-model="checkAll" @change="changeShowAll">SELECT</el-checkbox>
+              <div style="margin: 7px 0;"></div>
+              <el-checkbox-group v-model="checkedShow" @change="changeShow">
+                <el-checkbox v-for="(col,index) in listCol" :label="col.key" :key="index">{{col.key}}</el-checkbox>
+              </el-checkbox-group>
+              </Col> -->
         Top:
         <Input v-model.number="top" icon="pin" placeholder="请输入Top值" style="width: 150px;margin-right: 40px;"></Input>
         <RadioGroup v-model="orderType" style="margin-right: 30px;" v-if="orderType != 'NULL'">
@@ -138,7 +138,7 @@ export default {
           } else {
             that.orderType = 'NULL'
           }
-          that.getSql(that.top, that.orderKey)
+          that.getSql(that.top, that.orderKey, that.whereList)
         }
       })
     },
@@ -192,10 +192,10 @@ export default {
   },
   watch: {
     top(val) {
-      this.getSql(val, this.orderType)
+      this.getSql(val, this.orderType, this.whereList)
     },
     orderType(val) {
-      this.getSql(this.top, val)
+      this.getSql(this.top, val, this.whereList)
     },
     whereList(val) {
       this.getSql(this.top, this.orderType, val)
